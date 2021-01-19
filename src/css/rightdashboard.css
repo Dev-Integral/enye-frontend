@@ -1,0 +1,14 @@
+.r-main{
+    margin: 20px;
+    background-color: #e1e1e1;
+    width: 70%;
+    padding:20px 30px;
+    color: #111;
+    border-radius: 25px;
+    box-shadow: #111 20px 20px 10px 5px;
+}
+.p-list{
+    background: #fff;
+    margin-bottom: 15px;
+    padding: 10px;
+}
