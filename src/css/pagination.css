@@ -1,0 +1,26 @@
+.next{
+    width: 80px;
+    height: 48px;
+    background: #262A41 0% 0% no-repeat padding-box;
+    border-radius: 11px;
+    color: #fff;
+    border: none;
+    text-align: center;
+    outline: none;
+    margin-right: 20px;
+    cursor: pointer;
+    box-shadow: 10px 10px 40px #0000000D;
+}
+.next i{
+    margin: 0 10px;
+}
+.page-holder{
+    display: flex;
+    justify-content: center;
+}
+.next:hover{
+    background: #75D6D1 0% 0% no-repeat padding-box;
+    box-shadow: 4px 5px 20px #0000001A;
+    border-radius: 11px;
+    color: #fff;
+}

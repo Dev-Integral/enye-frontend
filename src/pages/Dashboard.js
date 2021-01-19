@@ -1,29 +1,29 @@
 import React, {useEffect, useState} from "react";
-
+import axios from 'axios';
 // components
-import Pagination from "../components/Pagination";
 import LeftDashboard from "../components/LeftDashboard";
 import RightDashboard from "../components/RightDashboard";
 import '../css/dashboard.css';
 
 const Dashboard = () => {
-    const [profiles, setProfiless] = useState([""]);
+    const [profiles, setProfiles] = useState([""]);
     const [profilesCopy, setProfilesCopy] = useState([""])
-    const [isloading, setLoading] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [usersPerPage] = useState(3);
+    const [isLoading, setLoading] = useState(false);
+    
+    
 
     useEffect(() => {
         const fetchProfiles = async () => {
-            setLoading(true);
-            const res = await axios.get("https://randomuser.me/api/?results=50");
-            setUsers(res.data);
-            setUsersCopy(res.data);
+            //setLoading(true);
+            const res = await axios.get("https://api.enye.tech/v1/challenge/records");
+            setProfiles(res.data);
+            setProfilesCopy(res.data);
             setLoading(false);
         }
         fetchProfiles();
     }, []);
     
+    console.log({profiles: profiles});
 
     const data = {
         records: {
@@ -1484,11 +1484,9 @@ const Dashboard = () => {
     return (
         <div className="main">
             <LeftDashboard />
-            <RightDashboard profilesList={profiles.records.profiles.length>0 ? 
-                profiles.records.profiles:data.records.profiles} />
-            <div>
-                <Pagination />
-            </div>
+            <RightDashboard 
+            isLoading={isLoading} profilesList={
+                data.records.profiles } />
         </div>
     )
 }

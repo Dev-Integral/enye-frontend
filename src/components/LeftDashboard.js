@@ -5,7 +5,7 @@ const LeftDashboard = () => {
     return(
         <div className="l-main">
             <h2>Hi, Left Dashboard here!</h2>
-            <p>Welcome Enye</p>
+            <h2>Welcome Enye</h2>
         </div>
     )
 }
