@@ -7,7 +7,6 @@ import '../css/dashboard.css';
 
 const Dashboard = () => {
     const [profiles, setProfiles] = useState([""]);
-    const [profilesCopy, setProfilesCopy] = useState([""])
     const [isLoading, setLoading] = useState(false);
     
     
@@ -17,7 +16,6 @@ const Dashboard = () => {
             //setLoading(true);
             const res = await axios.get("https://api.enye.tech/v1/challenge/records");
             setProfiles(res.data);
-            setProfilesCopy(res.data);
             setLoading(false);
         }
         fetchProfiles();

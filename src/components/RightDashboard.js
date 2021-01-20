@@ -4,6 +4,7 @@ import Pagination from '../components/Pagination';
 
 
 const RightDashboard = ({ profilesList, isLoading }) => {
+
     // Change page
     const [profilesPerPage] = useState(20);
     const [currentPage, setCurrentPage] = useState(1);
@@ -15,27 +16,7 @@ const RightDashboard = ({ profilesList, isLoading }) => {
     const currentProfiles = profilesList.length > 1 ? profilesList.slice(indexOfFirstProfile, indexOfLastProfile) : null;
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
-    const changeView = (viewType) => {
-        console.log({incoming: viewType});
-        /*switch (viewType) {
-            case "female":
-                setTitle(listName);
-                break;
-            case "male":
-                setTitle(listName);
-                const modifiedUsersMale = usersCopy.results.filter((user) => {
-                    return user.gender === "male"
-                })
-                const maleUpdate = { results: modifiedUsersMale };
-                setUsers(maleUpdate);
-                break;
-        }*/
-    }
-    const searchHandler=(input) => {
-        setSearchInput(input.target.value);
-        console.log({input: searchInput});
-    }
-
+    
     return (
         <div className="r-main">
             <h2>List of Profiles</h2>
@@ -43,12 +24,19 @@ const RightDashboard = ({ profilesList, isLoading }) => {
                 <h3>Filters</h3>
                 <div className="search-filter">
                     <div className="find-user">
-                        <select className="searchbox" placeholder="Country">
-                            <option>Country</option>
+                        <select className="searchbox" placeholder="Country" onChange={(query)=>{
+                            setSearchInput(query.target.value)
+                        }}>
+                            <option selected>Filter By card type</option>
+                            <option value="discover">Discover</option>
+                            <option value="mastercard">Mastercard</option>
+                            <option value="verve">Verve</option>
                         </select>
                     </div>
-                    <button type="button" onClick={() => changeView("male")} >Male Profiles</button>
-                    <button type="button" onClick={() => changeView("female")} >Female Profiles</button>
+                    <button type="button" onClick={()=>{
+                            setSearchInput("male")}} >Male Profiles</button>
+                    <button type="button" onClick={()=>{
+                            setSearchInput("female")}} >Female Profiles</button>
                     <div className="search-icon">
                         <i className="fa fa-search" aria-hidden="true"></i>
                         <input className="searchbox" type="text" onChange={(query)=>{
@@ -68,8 +56,11 @@ const RightDashboard = ({ profilesList, isLoading }) => {
                         {currentProfiles.filter((val)=> {
                             if(searchInput === ""){
                                 return val;
-                            }
-                            else if (val.FirstName.toLowerCase().includes(searchInput.toLowerCase())){ 
+                            }else if(val.Gender.toLowerCase() === searchInput.toLowerCase()){
+                                return val;
+                            }else if(val.CreditCardType.toLowerCase() === searchInput.toLowerCase()){
+                                return val;
+                            }else if (val.FirstName.toLowerCase().includes(searchInput.toLowerCase())){ 
                                 return val;
                             } 
                         })
