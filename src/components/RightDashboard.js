@@ -55,7 +55,8 @@ const RightDashboard = ({ profilesList, isLoading }) => {
                 <div>
                 <button type="button" onClick={() => {
                         setSearchInput("all")
-                    }} >All Profiles</button>
+                    }}
+                    className="all-p" >All Profiles</button>
                 </div>
             </div>
             { isLoading === true ?
