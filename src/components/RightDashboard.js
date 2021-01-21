@@ -52,7 +52,11 @@ const RightDashboard = ({ profilesList, isLoading }) => {
                         }} placeholder="Find a user" />
                     </div>
                 </div>
-
+                <div>
+                <button type="button" onClick={() => {
+                        setSearchInput("all")
+                    }} >All Profiles</button>
+                </div>
             </div>
             { isLoading === true ?
                 <motion.div initial="hidden"
@@ -73,6 +77,10 @@ const RightDashboard = ({ profilesList, isLoading }) => {
                                 return val;
                             } else if (val.FirstName.toLowerCase().includes(searchInput.toLowerCase())) {
                                 return val;
+                            } else if (searchInput === 'all') {
+                                return val;
+                            }else{
+                                return null;
                             }
                         })
                             .map((profile, index) => {
