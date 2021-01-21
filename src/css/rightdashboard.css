@@ -1,3 +1,5 @@
+@import url('https://fonts.googgleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+*
 .r-main{
     margin: 20px;
     background-color: #e1e1e1;
@@ -6,13 +8,49 @@
     color: #111;
     border-radius: 25px;
     box-shadow: 10px 10px 40px #0000000D;
-    
+    font-family: 'Poppins', sans-serif;
 }
-.filter h3{
+.wait{
+    font-size: 2.5em;
+    font-weight: 800;
+}
+.wait h3{
+    animation: animate 2s linear infinite;
+    color: #fff;
+}
+.wait h3:nth-child(1){
+    animation-delay: 0;
+}
+.filter h3, .r-main h2{
     font-size: 1.5em;
-    font-family: 'Poppins';
+    font-family: 'Poppins', sans-serif;
     font-weight: 700;
     color: #3C3F54;
+}
+@keyframes animate {
+    0%, 100%
+    {
+        color: #fff;
+        filter: blur(2px);
+        text-shadow: 0 0 10px #00b3ff,
+                    0 0 20px #00b3ff,
+                    0 0 40px #00b3ff,
+                    0 0 80px #00b3ff,
+                    0 0 120px #00b3ff,
+                    0 0 200px #00b3ff,
+                    0 0 300px #00b3ff,
+                    0 0 400px #00b3ff;
+    }
+    5%, 95%
+    {
+        color: #111;
+        filter: blur(0px);
+        text-shadow:none;
+    }
+}
+.r-main h2{
+    font-size: 2.5em;
+    font-weight: 600;
 }
 .search-filter{
     display: flex;
@@ -36,7 +74,7 @@
 .search-icon{
     width: 30%;
     background: #3C3F54 0% 0% no-repeat padding-box;
-    border: 1px solid #3C3F54;
+    height: 12px;
     border-radius: 15px;
     padding: 15px;
     margin: 30px 0 40px 20px;
@@ -64,6 +102,24 @@
     margin-bottom: 15px;
     padding: 20px;
     border-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.cardType{
+    background: #3f41bb;
+    height: 70px;
+    width: 120px;
+    border-radius: 10px;
+    color: #fff;
+    opacity: .7;
+}
+.cardType span{
+    position: relative;
+    top: 20px;
+    left: 15px;
+    margin-right: 10px;
 }
 .find-user{ 
     background: #eee;
@@ -99,4 +155,7 @@
     color: #262A41;
     font-size: 11px;
     opacity: 1;
+}
+.d-title{
+    font-weight: 700;
 }

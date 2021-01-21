@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "../css/rightdashboard.css";
 import Pagination from '../components/Pagination';
-
+import { motion } from 'framer-motion';
 
 const RightDashboard = ({ profilesList, isLoading }) => {
 
@@ -16,7 +16,13 @@ const RightDashboard = ({ profilesList, isLoading }) => {
     const currentProfiles = profilesList.slice(indexOfFirstProfile, indexOfLastProfile);
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
-    
+
+    //motion framer
+    const variants = {
+        visible: { opacity: 1 },
+        hidden: { opacity: 0 },
+    }
+
     return (
         <div className="r-main">
             <h2>List of Profiles</h2>
@@ -24,7 +30,7 @@ const RightDashboard = ({ profilesList, isLoading }) => {
                 <h3>Filters</h3>
                 <div className="search-filter">
                     <div className="find-user">
-                        <select className="searchbox" placeholder="Country" onChange={(query)=>{
+                        <select className="searchbox" placeholder="Country" onChange={(query) => {
                             setSearchInput(query.target.value)
                         }}>
                             <option selected>Filter By card type</option>
@@ -33,13 +39,15 @@ const RightDashboard = ({ profilesList, isLoading }) => {
                             <option value="verve">Verve</option>
                         </select>
                     </div>
-                    <button type="button" onClick={()=>{
-                            setSearchInput("male")}} >Male Profiles</button>
-                    <button type="button" onClick={()=>{
-                            setSearchInput("female")}} >Female Profiles</button>
+                    <button type="button" onClick={() => {
+                        setSearchInput("male")
+                    }} >Male Profiles</button>
+                    <button type="button" onClick={() => {
+                        setSearchInput("female")
+                    }} >Female Profiles</button>
                     <div className="search-icon">
                         <i className="fa fa-search" aria-hidden="true"></i>
-                        <input className="searchbox" type="text" onChange={(query)=>{
+                        <input className="searchbox" type="text" onChange={(query) => {
                             setSearchInput(query.target.value)
                         }} placeholder="Find a user" />
                     </div>
@@ -47,35 +55,42 @@ const RightDashboard = ({ profilesList, isLoading }) => {
 
             </div>
             { isLoading === true ?
-                <div>
-                    <h3>Please Wait</h3>
-                </div>
+                <motion.div initial="hidden"
+                animate="visible"
+                variants={variants}
+                className="wait">
+                    <h3>Please wait . . . </h3>
+                </motion.div>
                 :
                 currentProfiles.length > 0 ?
                     <div className="profiles">
-                        {currentProfiles.filter((val)=> {
-                            if(searchInput === ""){
+                        {currentProfiles.filter((val) => {
+                            if (searchInput === "") {
                                 return val;
-                            }else if(val.Gender.toLowerCase() === searchInput.toLowerCase()){
+                            } else if (val.Gender.toLowerCase() === searchInput.toLowerCase()) {
                                 return val;
-                            }else if(val.CreditCardType.toLowerCase() === searchInput.toLowerCase()){
+                            } else if (val.CreditCardType.toLowerCase() === searchInput.toLowerCase()) {
                                 return val;
-                            }else if (val.FirstName.toLowerCase().includes(searchInput.toLowerCase())){ 
-                                return val;
-                            }else{
+                            } else if (val.FirstName.toLowerCase().includes(searchInput.toLowerCase())) {
                                 return val;
                             }
                         })
-                        .map((profile, index) => {
-                            return (
-                                <div key={index} {...profile} className="p-list">
-                                    <div>{profile.FirstName} {profile.LastName}</div>
-                                    <div>{profile.Email}</div>
-                                    <div>{profile.Gender}</div>
-                                    <div>{profile.LastLogin}</div>
-                                </div>
-                            )
-                        })}
+                            .map((profile, index) => {
+                                return (
+                                    <motion.div initial="hidden"
+                                        animate="visible"
+                                        variants={variants}
+                                        key={index} {...profile} className="p-list">
+                                        <div className="details">
+                                            <div><span className="d-title">Full Name:</span> {profile.FirstName} {profile.LastName}</div>
+                                            <div><span className="d-title">Email:</span> {profile.Email}</div>
+                                            <div><span className="d-title">Gender:</span> {profile.Gender}</div>
+                                            <div><span className="d-title">Last Login:</span> {profile.LastLogin}</div>
+                                        </div>
+                                        <div className="cardType"><span>{profile.CreditCardType}</span></div>
+                                    </motion.div>
+                                )
+                            })}
                     </div>
                     :
                     <div>
