@@ -13,7 +13,7 @@ const RightDashboard = ({ profilesList, isLoading }) => {
     // Get current profiles
     const indexOfLastProfile = currentPage * profilesPerPage;
     const indexOfFirstProfile = indexOfLastProfile - profilesPerPage;
-    const currentProfiles = profilesList.length > 1 ? profilesList.slice(indexOfFirstProfile, indexOfLastProfile) : null;
+    const currentProfiles = profilesList.slice(indexOfFirstProfile, indexOfLastProfile);
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
     
@@ -62,7 +62,9 @@ const RightDashboard = ({ profilesList, isLoading }) => {
                                 return val;
                             }else if (val.FirstName.toLowerCase().includes(searchInput.toLowerCase())){ 
                                 return val;
-                            } 
+                            }else{
+                                return val;
+                            }
                         })
                         .map((profile, index) => {
                             return (
